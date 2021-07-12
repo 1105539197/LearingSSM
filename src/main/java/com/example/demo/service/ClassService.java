@@ -14,4 +14,5 @@ import java.util.List;
 
 public interface ClassService extends IService<Class> {
     List<Class> selectList(String classId);
+    List<Class> selectByResultMap();
 }

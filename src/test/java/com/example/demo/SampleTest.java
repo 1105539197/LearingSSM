@@ -30,21 +30,27 @@ public class SampleTest {
     private StudentService studentService;
 
     @Test
-    public void testClassListWithStu(){
+    public void testClassListWithStu() {
         List<Class> classList = classService.selectList("1");
-        classList.forEach(c->{
+        classList.forEach(c -> {
             String classId = c.getClassId();
             List<Student> students = studentService.selectListByClassId(classId);
             c.setStudents(students);
         });
         classList.forEach(System.out::println);
         List<Class> classList2 = classService.selectList(null);
-        classList.forEach(c->{
+        classList.forEach(c -> {
             String classId = c.getClassId();
             List<Student> students = studentService.selectListByClassId(classId);
             c.setStudents(students);
         });
         classList2.forEach(System.out::println);
+    }
+
+    @Test
+    public void testResultMap() {
+        List<Class> classList = classService.selectByResultMap();
+        classList.forEach(System.out::println);
     }
 
 
