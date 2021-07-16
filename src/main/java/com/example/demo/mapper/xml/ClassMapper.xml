@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ClassMapper">
-    <select id="selectByResultMap" resultType="com.example.demo.entity.Class">
-        select *from t_class
+    <select id="selectByResultMap" resultMap="classStudent">
+        select * from t_class c
+        join t_student s
+        on c.class_id=s.class_id
     </select>
+    <resultMap id="classStudent" type="com.example.demo.entity.Class">
+        <id property="classId" column="class_id" />
+        <result property="className" column="class_name" />
+        <result property="teacherName" column="teacher_name" />
+        <collection property="students" ofType="com.example.demo.entity.Student" javaType="list">
+            <id property="studentId" column="student_id" />
+            <result property="studentName" column="student_name" />
+            <result property="classId" column="class_id" />
+        </collection>
+    </resultMap>
 </mapper>

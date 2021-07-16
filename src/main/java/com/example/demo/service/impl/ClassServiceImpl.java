@@ -29,7 +29,7 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
     public List<Class> selectList(String classId) {
         QueryWrapper<Class> classQueryWrapper = new QueryWrapper<>();
         classQueryWrapper.eq(StringUtil.notEmpty(classId), "class_id", classId);
-        List<Class> classList = baseMapper.selectList(classQueryWrapper);
+        List<Class> classList = list(classQueryWrapper);
         classList.forEach(c -> {
             String stuClassId = c.getClassId();
             List<Student> students = studentService.selectListByClassId(stuClassId);

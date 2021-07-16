@@ -22,6 +22,6 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     public List<Student> selectListByClassId(String classId) {
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.eq(StringUtil.notEmpty(classId), "class_id", classId);
-        return baseMapper.selectList(studentQueryWrapper);
+        return list(studentQueryWrapper);
     }
 }
