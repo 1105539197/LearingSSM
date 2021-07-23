@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.example.demo.entity.Class;
 import com.example.demo.entity.Student;
 import com.example.demo.mapper.ClassMapper;
@@ -50,6 +51,18 @@ public class SampleTest {
     @Test
     public void testResultMap() {
         List<Class> classList = classService.selectByResultMap();
+        classList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testLambdaChain() {
+        List<Class> classList = classService.selectList(null);
+        classList.forEach(c -> c.setStudents(
+                new LambdaQueryChainWrapper<>(studentService.getBaseMapper())
+                        .eq(Student::getClassId, c.getClassId())
+                        .list()
+        ));
+        System.out.println("========================");
         classList.forEach(System.out::println);
     }
 
