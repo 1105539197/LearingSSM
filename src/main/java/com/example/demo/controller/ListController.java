@@ -17,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/hello")
-public class HelloController {
+public class ListController {
     @Autowired
     private ClassService classService;
 
