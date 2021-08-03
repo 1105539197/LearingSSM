@@ -11,6 +11,7 @@
         <id property="classId" column="class_id"/>
         <result property="className" column="class_name"/>
         <result property="teacherName" column="teacher_name"/>
+        <result property="time" column="time"/>
         <collection property="students" ofType="com.example.demo.entity.Student" javaType="list">
             <id property="studentId" column="student_id"/>
             <result property="studentName" column="student_name"/>

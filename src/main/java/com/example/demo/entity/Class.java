@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,5 +28,7 @@ public class Class {
 
     @TableField(exist = false)
     private List<Student> students;
+
+    private Date time;
 
 }
