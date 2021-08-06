@@ -15,5 +15,4 @@ import java.util.List;
 
 @Service
 public interface StudentService extends IService<Student> {
-    List<Student> selectListByClassId(String studentId);
 }

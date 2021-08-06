@@ -18,10 +18,5 @@ import java.util.List;
  */
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
-    @Override
-    public List<Student> selectListByClassId(String classId) {
-        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.eq(StringUtil.notEmpty(classId), "class_id", classId);
-        return list(studentQueryWrapper);
-    }
+
 }

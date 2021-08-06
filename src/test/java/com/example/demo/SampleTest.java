@@ -32,20 +32,7 @@ public class SampleTest {
 
     @Test
     public void testClassListWithStu() {
-        List<Class> classList = classService.selectList("1");
-        classList.forEach(c -> {
-            String classId = c.getClassId();
-            List<Student> students = studentService.selectListByClassId(classId);
-            c.setStudents(students);
-        });
-        classList.forEach(System.out::println);
-        List<Class> classList2 = classService.selectList(null);
-        classList.forEach(c -> {
-            String classId = c.getClassId();
-            List<Student> students = studentService.selectListByClassId(classId);
-            c.setStudents(students);
-        });
-        classList2.forEach(System.out::println);
+        classService.selectList(null).forEach(System.out::println);
     }
 
     @Test

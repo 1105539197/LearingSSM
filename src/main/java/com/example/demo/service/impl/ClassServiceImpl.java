@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.alibaba.druid.util.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.Class;
 import com.example.demo.entity.Student;
@@ -27,12 +26,13 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
 
     @Override
     public List<Class> selectList(String classId) {
-        QueryWrapper<Class> classQueryWrapper = new QueryWrapper<>();
-        classQueryWrapper.eq(StringUtil.notEmpty(classId), "class_id", classId);
-        List<Class> classList = list(classQueryWrapper);
+        List<Class> classList = new LambdaQueryChainWrapper<>(getBaseMapper())
+                .eq(StringUtil.notEmpty(classId), Class::getClassId, classId)
+                .list();
         classList.forEach(c -> {
-            String stuClassId = c.getClassId();
-            List<Student> students = studentService.selectListByClassId(stuClassId);
+            List<Student> students = new LambdaQueryChainWrapper<>(studentService.getBaseMapper())
+                    .eq(Student::getClassId, c.getClassId())
+                    .list();
             c.setStudents(students);
         });
         return classList;
