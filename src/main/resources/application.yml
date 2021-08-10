@@ -10,9 +10,25 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+  thymeleaf:
+    enabled: true  #开启thymeleaf视图解析
+    encoding: utf-8  #编码
+    prefix: classpath:/templates/  #前缀
+    cache: false  #是否使用缓存
+    mode: HTML  #严格的HTML语法模式
+    suffix: .html  #后缀名
+
+  # 静态文件请求匹配方式
+  mvc:
+    static-path-pattern: /**
+  # 修改默认的静态寻址资源目录
+  resources:
+    static-locations:  classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/static/**
 logging:
   level:
     root: info
+
 
 mybatis-plus:
   mapper-locations: classpath*:com/example/demo/mapper/xml/*Mapper.xml
@@ -30,4 +46,6 @@ mybatis-plus:
     # 返回类型为Map,显示null对应的字段
     call-setters-on-nulls: true
 server:
-  port: 6324
+  port: 6789
+
+

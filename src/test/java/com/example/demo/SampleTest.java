@@ -68,7 +68,7 @@ public class SampleTest {
 
     @Test
     public void selectSubList(){
-        List<Dept> list = deptService.selectSubList("GS");
+        List<Dept> list = deptService.tree();
         list.forEach(System.out::println);
     }
 

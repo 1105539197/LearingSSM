@@ -125,6 +125,13 @@
             <version>1.5.22</version>
         </dependency>
 
+
+        <!-- 引入thymeleaf依赖包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

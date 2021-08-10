@@ -1,0 +1,5 @@
+###
+GET http://localhost:6666/hello/listClass
+
+###
+GET http://localhost:6666/dept/tree
