@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -33,5 +34,15 @@ public class TestInitCollection {
     public void entry(){
         Map.Entry<String, String> entry = new AbstractMap.SimpleEntry<>("key", "value");
         System.out.println(entry);
+    }
+
+
+    @Test
+    public void test() throws Exception {
+        HashMap m = new HashMap();
+        Field tableField = HashMap.class.getDeclaredField("table");
+        tableField.setAccessible(true);
+        Object[] table = (Object[]) tableField.get(m);
+        System.out.println(table == null ? 0 : table.length);
     }
 }

@@ -28,4 +28,5 @@ public class DeptController {
     public List<Dept> tree(){
         return deptService.tree();
     }
+
 }

@@ -1,15 +1,12 @@
 package com.example.demo;
 
-import com.baomidou.mybatisplus.extension.api.R;
-import com.example.demo.entity.Student;
-import org.apache.poi.ss.formula.functions.T;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,20 +35,46 @@ public class TestFlatMap {
                 new String[]{"jumps", "over"},
                 "a", "lazy", "dog"
         );
-        // list.stream()
-        //         .flatMap(t->{
-        //             if(t instanceof String){
-        //                 return Stream.of(t);
-        //             } else if (t instanceof List) {
-        //                 return ((List<?>)t).stream();
-        //             }else if (t instanceof String[]){
-        //                 return Arrays.stream((String[]) t);
-        //             }
-        //             return null;
-        //         })
-        //         .forEach(System.out::println);
+        list.stream()
+                .flatMap(t -> {
+                    if (t instanceof String) {
+                        return Stream.of(t);
+                    } else if (t instanceof List) {
+                        return ((List<?>) t).stream();
+                    } else if (t instanceof String[]) {
+                        return Arrays.stream((String[]) t);
+                    }
+                    return null;
+                })
+                .forEach(System.out::println);
 
     }
+
+    @Test
+    public void testFlatten() throws JsonProcessingException {
+        List<Object> list = Arrays.asList(
+                Arrays.asList("the", "quick"),
+                new String[]{"brown", "fox"},
+                new HashSet<>(Arrays.asList("jumps", "over")),
+                "a", "lazy", "dog"
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonStr = mapper.writeValueAsString(list);
+        List<?> o = mapper.readValue(jsonStr, List.class);
+        List<String> collect = o.stream()
+                .flatMap(t -> {
+                    if (t instanceof String) {
+                        return Stream.of(t);
+                    } else if (t instanceof List) {
+                        return ((List<?>) t).stream();
+                    }
+                    return null;
+                })
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
 
 
 
